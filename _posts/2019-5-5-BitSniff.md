@@ -3,7 +3,7 @@ layout: post
 title: Introducing BitSniff
 ---
 
-On September 5th-6th, during the Bitcoin emBassy Hackathon, myself and Michael Maltsev developed **BitSniff** - a tool for detecting Bitcoin-related communications in encrypted traffic. Today we release an updated, stable version of it. You can check the [interactive demo](https://m417z.com/bitsniff/) or clone the [GitHub repo](https://github.com/m417z/bitsniff) to use it yourself.  
+On September 5th-6th, during the Bitcoin emBassy Hackathon, myself and Michael Maltsev developed **BitSniff** - a tool for detecting Bitcoin-related communications in encrypted traffic. Today we release an updated, stable version of it. You can check the interactive [demo](https://m417z.com/bitsniff/) or clone the GitHub [repository](https://github.com/m417z/bitsniff) to use it yourself.  
 The following is the project write-up, focused on motivation and methodology.
 
 ## Motivation
@@ -17,7 +17,7 @@ Now for those who do care, some steps are obvious - using VPN and running the no
 Every time you use software that interacts with a Bitcoin network, and especially a Bitcoin node, you leave a sticky fingerprint in your traffic. It comes in the form of a small, but unavoidable spike in volume every time a new block is mined and the nodes start gossiping about it. The blocks in Bitcoin are quite big, and the propagation speed is critical for consensus (greater delay means more frequent accidental forks), so such effect is predictable, and, in a sense, inherent to the Bitcoin architecture.  
 Notably, the volume of block-related messages was drastically reduced since the introduction of Compact Block Relay ([BIP 152](https://github.com/bitcoin/bips/blob/master/bip-0152.mediawiki)). Instead of requesting whole blocks, mostly consisting of transactions already known to the node, the peer informed of a new block is only requesting the missing transactions. Yet the amount of extra communications in the seconds following a new block is still considerable.  
 
-![_config.yml]({{ site.baseurl }}/images/config.png)  
+![_config.yml]({{ site.baseurl }}/images/bitsniff/protocol-flow.png)  
 _(Image taken from the BIP 152 page)_
 
 This effect may not be noticeable for a single block, but over time it gets statistically significant, and may get exploited.
@@ -25,7 +25,7 @@ This effect may not be noticeable for a single block, but over time it gets stat
 ## Methodology
 Our goal, given a time series of traffic volume over time, is to determine whether it tends to have larger volume just after a new block is found, during a window of typical propagation delay. We also aim to provide a meaningful metric measuring how confident we are that Bitcoin communications are, indeed, present.
 
-![_config.yml]({{ site.baseurl }}/images/config.png)
+![_config.yml]({{ site.baseurl }}/images/bitsniff/flowchart.jpg)
 
 1. An input file is parsed to create a target time series, aggregated in units of 1 second for further calculations speed-up.
 2. Using the earliest timestamp and the length of the target, the actual block times during that window are fetched. Note that this information is public by design.
@@ -42,7 +42,7 @@ The performance of the attack is a function of traffic length, with longer logs 
 For the true positive estimation we used our own full node traffic, logged for 24 hours. Note that we did record on the 8333 port, so the results apply to dedicated nodes only. We will discuss mixed traffic in a later section.  
 There are infinitely many options to define false positive. We mostly used, arguably, the 'hardest' one - the same actual full node traffic, but with shifted timestamps (e.g. shifted three hours backwards). This way, the traffic logs still represent Bitcoin activity, but the logs don't match the real block times. We also added several YouTube traffic logs. None of that did matter much as with a given threshold the false positive rate was, effectively, zero.
 
-![_config.yml]({{ site.baseurl }}/images/config.png)
+![_config.yml]({{ site.baseurl }}/images/bitsniff/performance.jpg)
 
 ## Use cases
 As mentioned above, one use case for the technique is detecting Bitcoin nodes by governments or ISPs. Our primary motivation behind this project is raising awareness regarding this possibility.  
