@@ -45,7 +45,7 @@ There are infinitely many options to define false positive. We mostly used, argu
 
 ![_config.yml]({{ site.baseurl }}/images/bitsniff/performance.jpg)
 
-## Use cases
+## Use Cases
 As mentioned above, one use case for the technique is detecting Bitcoin nodes by governments or ISPs. Our primary motivation behind this project is raising awareness regarding this possibility.  
 It can also be applied to many other blockchain-based currencies. Bitcoin forks with bigger blocks are an even easier target, and so are currencies with higher block density, such as Monero, Litecoin and Ethereum (assuming someone ever succeeds to run an Ethereum node).
 
