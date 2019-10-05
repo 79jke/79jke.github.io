@@ -3,8 +3,7 @@ layout: post
 title: Introducing BitSniff
 ---
 
-On September 5th-6th, during the Bitcoin emBassy Hackathon, myself and Michael Maltsev developed **BitSniff** - a tool for detecting Bitcoin-related communications in encrypted traffic.  
-Today we release an updated, stable version of it. You can check the [interactive demo](https://m417z.com/bitsniff/) or clone the [GitHub repo](https://github.com/m417z/bitsniff) to use it yourself.  
+On September 5th-6th, during the Bitcoin emBassy Hackathon, myself and Michael Maltsev developed **BitSniff** - a tool for detecting Bitcoin-related communications in encrypted traffic. Today we release an updated, stable version of it. You can check the [interactive demo](https://m417z.com/bitsniff/) or clone the [GitHub repo](https://github.com/m417z/bitsniff) to use it yourself.  
 The following is the project write-up, focused on motivation and methodology.
 
 ## Motivation
@@ -19,8 +18,7 @@ Every time you use software that interacts with a Bitcoin network, and especiall
 Notably, the volume of block-related messages was drastically reduced since the introduction of Compact Block Relay ([BIP 152](https://github.com/bitcoin/bips/blob/master/bip-0152.mediawiki)). Instead of requesting whole blocks, mostly consisting of transactions already known to the node, the peer informed of a new block is only requesting the missing transactions. Yet the amount of extra communications in the seconds following a new block is still considerable.  
 
 ![_config.yml]({{ site.baseurl }}/images/config.png)
-
-__(Image taken from the BIP 152 page)__
+_(Image taken from the BIP 152 page)_
 
 This effect may not be noticeable for a single block, but over time it gets statistically significant, and may get exploited.
 
