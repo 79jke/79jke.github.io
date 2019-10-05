@@ -3,7 +3,8 @@ layout: post
 title: Introducing BitSniff
 ---
 
-Today myself and [Michael Maltsev](https://m417z.com/) release **BitSniff** - a tool for detecting Bitcoin-related communications in encrypted traffic. You can check our [interactive demo](https://m417z.com/bitsniff/) or clone the [GitHub repo](https://github.com/m417z/bitsniff) to use it.  
+On September 5th-6th, during the Bitcoin emBassy Hackathon, myself and Michael Maltsev developed **BitSniff** - a tool for detecting Bitcoin-related communications in encrypted traffic.  
+Today we release an updated, stable version of it. You can check the [interactive demo](https://m417z.com/bitsniff/) or clone the [GitHub repo](https://github.com/m417z/bitsniff) to use it yourself.  
 The following is the project write-up, focused on motivation and methodology.
 
 ## Motivation
@@ -65,7 +66,8 @@ There are many ways to go about it, but staying completely undetected is far fro
 Beyond active measures available now, both privacy and bandwidth efficiency of Bitcoin communications are actively worked on. It is entirely possible that the messaging protocol will get to the point where block propagation doesn’t trigger any significant spikes in traffic volume.
 
 ## Pitch
-https://youtu.be/9S8xsDq3PTU (should be embedded)
+Click below to watch our pitch from the hackathon.
+[![](http://img.youtube.com/vi/9S8xsDq3PTU/0.jpg)](http://www.youtube.com/watch?v=9S8xsDq3PTU "")
 
 ## Acknowledgements  
 The technique idea was originally investigated in work by Prof. Ittay Eyal, Prof. Amir Houmansadr, Fatemeh Rezaei and Niko Kudriastev.
