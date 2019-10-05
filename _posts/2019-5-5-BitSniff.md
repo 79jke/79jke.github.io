@@ -17,7 +17,7 @@ Now for those who do care, some steps are obvious - using VPN and running the no
 Every time you use software that interacts with a Bitcoin network, and especially a Bitcoin node, you leave a sticky fingerprint in your traffic. It comes in the form of a small, but unavoidable spike in volume every time a new block is mined and the nodes start gossiping about it. The blocks in Bitcoin are quite big, and the propagation speed is critical for consensus (greater delay means more frequent accidental forks), so such effect is predictable, and, in a sense, inherent to the Bitcoin architecture.  
 Notably, the volume of block-related messages was drastically reduced since the introduction of Compact Block Relay ([BIP 152](https://github.com/bitcoin/bips/blob/master/bip-0152.mediawiki)). Instead of requesting whole blocks, mostly consisting of transactions already known to the node, the peer informed of a new block is only requesting the missing transactions. Yet the amount of extra communications in the seconds following a new block is still considerable.  
 
-![_config.yml]({{ site.baseurl }}/images/config.png)
+![_config.yml]({{ site.baseurl }}/images/config.png)  
 _(Image taken from the BIP 152 page)_
 
 This effect may not be noticeable for a single block, but over time it gets statistically significant, and may get exploited.
