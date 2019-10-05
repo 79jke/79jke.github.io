@@ -43,8 +43,8 @@ All that is left is to define a threshold for tagging a traffic as Bitcoin-relat
 
 ## Performance
 The performance of the attack is a function of traffic length, with longer logs corresponding with better performance. For the ease of presentation, we used a single confidence threshold of 95%, preferring to err on the false negative side.  
-* For the true positive estimation we used our own full node traffic, logged for 24 hours. Note that we did record on the 8333 port, so the results apply to dedicated nodes only. We will discuss mixed traffic in a later section.  
-* There are infinitely many options to define false positive. We mostly used, arguably, the 'hardest' one - the same actual full node traffic, but with shifted timestamps (e.g. shifted three hours backwards). This way, the traffic logs still represent Bitcoin activity, but the logs don't match the real block times. We also added several YouTube traffic logs. None of that did matter much as with a given threshold the false positive rate was, effectively, zero.
+For the true positive estimation we used our own full node traffic, logged for 24 hours. Note that we did record on the 8333 port, so the results apply to dedicated nodes only. We will discuss mixed traffic in a later section.  
+There are infinitely many options to define false positive. We mostly used, arguably, the 'hardest' one - the same actual full node traffic, but with shifted timestamps (e.g. shifted three hours backwards). This way, the traffic logs still represent Bitcoin activity, but the logs don't match the real block times. We also added several YouTube traffic logs. None of that did matter much as with a given threshold the false positive rate was, effectively, zero.
 
 ![_config.yml]({{ site.baseurl }}/images/bitsniff/performance.jpg)
 
