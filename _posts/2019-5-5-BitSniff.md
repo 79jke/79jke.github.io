@@ -24,25 +24,25 @@ Our goal, given a time series of traffic volume over time, is to determine wheth
 
 ![_config.yml]({{ site.baseurl }}/images/config.png)
 
-An input file is parsed to create a target time series, aggregated in units of 1 second for further calculations speed-up.
-Using the earliest timestamp and the length of the target, the actual block times during that window are fetched. Note that this information is public by design.
-Block times are transformed into expected activity time series by adding bell-like shapes after block times, sized according to typical propagation delay.
+1. An input file is parsed to create a target time series, aggregated in units of 1 second for further calculations speed-up.
+2. Using the earliest timestamp and the length of the target, the actual block times during that window are fetched. Note that this information is public by design.
+3. Block times are transformed into expected activity time series by adding bell-like shapes after block times, sized according to typical propagation delay.
 
 We now have two time series, the target and the expected. The questions are:
  - How similar they are?
  - How confident we are that this level of similarity is not accidental?
 
-To answer the first question, we calculate the correlation of the target and the expected. The problem is, the correlation is not a sufficient metric by itself, as what correlation we should consider meaningful depends on the shape of the traffic - e.g. 40% may be very significant for some shape of the traffic, and really low for others.
-To address that issue, we generate a lot of fake expected time series that have, on average, the same number of blocks as actual one, and calculate the traffic correlation to every one of them. Those fakes are very similar to the expected activity, except for one thing - the block times are selected randomly, regardless of the real block times. If the target traffic is as similar to these as it is to real block times, this similarity is meaningless.
-We calculate the z-score of the actual correlation compared to the fake ones - a measure of how far the actual correlation is from the fakes average, compared to how scattered the fakes tend to be. Intuitively, we now know not only how similar our traffic is to the expected Bitcoin activity - we also know how unlikely such similarity was to occur by chance.
-Most people probably feel more comfortable with percentages than with z-scores, so we finish the process with approximating the corresponding percentage confidence level using the Z table.
+4. To answer the first question, we calculate the correlation of the target and the expected. The problem is, the correlation is not a sufficient metric by itself, as what correlation we should consider meaningful depends on the shape of the traffic - e.g. 40% may be very significant for some shape of the traffic, and really low for others.
+5. To address that issue, we generate a lot of fake expected time series that have, on average, the same number of blocks as actual one, and calculate the traffic correlation to every one of them. Those fakes are very similar to the expected activity, except for one thing - the block times are selected randomly, regardless of the real block times. If the target traffic is as similar to these as it is to real block times, this similarity is meaningless.
+6. We calculate the z-score of the actual correlation compared to the fake ones - a measure of how far the actual correlation is from the fakes average, compared to how scattered the fakes tend to be. Intuitively, we now know not only how similar our traffic is to the expected Bitcoin activity - we also know how unlikely such similarity was to occur by chance.
+7. Most people probably feel more comfortable with percentages than with z-scores, so we finish the process with approximating the corresponding percentage confidence level using the Z table.
 
 All that is left is to define a threshold for tagging a traffic as Bitcoin-related. There is no right value per se, and it can be determined empirically to achieve the desirable balance between true positive and false positive performance.
 
 ## Performance
 The performance of the attack is a function of traffic length, with longer logs corresponding with better performance. For the ease of presentation, we used a single confidence threshold of 95%, preferring to err on the false negative side.  
 For the true positive estimation we used our own full node traffic, logged for 24 hours. Note that we did record on the 8333 port, so the results apply to dedicated nodes only. We will discuss mixed traffic in a later section.  
-For the false positive, there are infinitely many options. We mostly used, arguably, the 'hardest' one - the same actual full node traffic, but with shifted timestamps (e.g. shifted three hours backwards). This way, the traffic logs still represent Bitcoin activity, but the logs don't match the real block times. We also added several YouTube traffic logs of Khabib Nurmagomedov training. None of that did matter much as with a given threshold the false positive rate was, effectively, zero.
+There are infinitely many options to define false positive. We mostly used, arguably, the 'hardest' one - the same actual full node traffic, but with shifted timestamps (e.g. shifted three hours backwards). This way, the traffic logs still represent Bitcoin activity, but the logs don't match the real block times. We also added several YouTube traffic logs of Khabib Nurmagomedov training. None of that did matter much as with a given threshold the false positive rate was, effectively, zero.
 
 ![_config.yml]({{ site.baseurl }}/images/config.png)
 
