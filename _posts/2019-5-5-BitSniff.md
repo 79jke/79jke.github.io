@@ -3,6 +3,10 @@ layout: post
 title: Introducing BitSniff
 ---
 
+Today myself and [Michael Maltsev](https://m417z.com/) release **BitSniff** - a tool for detecting Bitcoin-related communications in encrypted traffic. You can check our [interactive demo](https://m417z.com/bitsniff/) or clone the [GitHub repo](https://github.com/m417z/bitsniff) to use it.  
+The following is the project write-up, focused on motivation and methodology.
+
+## Motivation
 As Bitcoin stubbornly continues to exist and gain traction, it also starts grabbing attention of those in charge. With censorship resistance being one of Bitcoin's key value propositions, the ability of third parties to establish who participates in this new economy may become a non-negligible issue. Imagine Bitcoin getting completely outlawed in China - being detected while using it may have very grim consequences.  
 Therefore, we must ask ourselves - who else knows you are running Bitcoin?
 
@@ -15,7 +19,7 @@ Notably, the volume of block-related messages was drastically reduced since the 
 
 ![_config.yml]({{ site.baseurl }}/images/config.png)
 
-(Image taken from the BIP 152 page)
+__(Image taken from the BIP 152 page)__
 
 This effect may not be noticeable for a single block, but over time it gets statistically significant, and may get exploited.
 
@@ -28,12 +32,10 @@ Our goal, given a time series of traffic volume over time, is to determine wheth
 2. Using the earliest timestamp and the length of the target, the actual block times during that window are fetched. Note that this information is public by design.
 3. Block times are transformed into expected activity time series by adding bell-like shapes after block times, sized according to typical propagation delay.
 
-We now have two time series, the target and the expected. The questions are:
- - How similar they are?
- - How confident we are that this level of similarity is not accidental?
+We now have two time series, the target and the expected. How similar they are? How confident we are that this level of similarity is not accidental?
 
 4. To answer the first question, we calculate the correlation of the target and the expected. The problem is, the correlation is not a sufficient metric by itself, as what correlation we should consider meaningful depends on the shape of the traffic - e.g. 40% may be very significant for some shape of the traffic, and really low for others.
-5. To address that issue, we generate a lot of fake expected time series that have, on average, the same number of blocks as actual one, and calculate the traffic correlation to every one of them. Those fakes are very similar to the expected activity, except for one thing - the block times are selected randomly, regardless of the real block times. If the target traffic is as similar to these as it is to real block times, this similarity is meaningless.
+5. We address that issue by generating a lot of fake expected time series that have, on average, the same number of blocks as actual one, and calculate the traffic correlation to every one of them. Those fakes are very similar to the expected activity, except for one thing - the block times are selected randomly, regardless of the real block times. If the target traffic is as similar to these as it is to real block times, this similarity is meaningless.
 6. We calculate the z-score of the actual correlation compared to the fake ones - a measure of how far the actual correlation is from the fakes average, compared to how scattered the fakes tend to be. Intuitively, we now know not only how similar our traffic is to the expected Bitcoin activity - we also know how unlikely such similarity was to occur by chance.
 7. Most people probably feel more comfortable with percentages than with z-scores, so we finish the process with approximating the corresponding percentage confidence level using the Z table.
 
@@ -56,15 +58,14 @@ One common case is gaining illicit access to electricity for Bitcoin mining, exp
 ## Protection
 There are many ways to go about it, but staying completely undetected is far from trivial. Traditional privacy enhancing tools mostly focus on the packet level, which is orthogonal to the technique, and there is no ongoing effort to address it on the protocol level. Let’s break up the potential defence vectors.
  
-* VPN / Tor - unlikely to affect the time series shape much, and therefore for larger traffic lengths the statistical significance of block-related spikes will inevitably become overwhelming.
-* Traffic mixing - for traffic volumes that are orders of magnitude higher than Bitcoin P2P communications, mixing is likely to be very effective. That would, however, demand constant shielding of both upstream and downstream communications, and couldn’t be done effectively by just running the node on a general purpose machine - any noticeably long unshielded period may be enough for detection.
-* Being your own ISP - too spicy for most, but that should work.
+* **VPN / Tor** - unlikely to affect the time series shape much, and therefore for larger traffic lengths the statistical significance of block-related spikes will inevitably become overwhelming.
+* **Traffic mixing** - for traffic volumes that are orders of magnitude higher than Bitcoin P2P communications, mixing is likely to be very effective. That would, however, demand constant shielding of both upstream and downstream communications, and couldn’t be done effectively by just running the node on a general purpose machine - any noticeably long unshielded period may be enough for detection.
+* **Being your own ISP** - too spicy for most, but that should work.
 
 Beyond active measures available now, both privacy and bandwidth efficiency of Bitcoin communications are actively worked on. It is entirely possible that the messaging protocol will get to the point where block propagation doesn’t trigger any significant spikes in traffic volume.
 
 ## Pitch
 https://youtu.be/9S8xsDq3PTU (should be embedded)
 
-## Acknowledgements
-A working prototype of BitSniff was implemented during the Bitcoin emBassy Hackathon 2019 by Michael Maltsev and Niko Kudriastev.  
+## Acknowledgements  
 The technique idea was originally investigated in work by Prof. Ittay Eyal, Prof. Amir Houmansadr, Fatemeh Rezaei and Niko Kudriastev.
