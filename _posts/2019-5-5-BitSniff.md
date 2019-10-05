@@ -29,10 +29,7 @@ Our goal, given a time series of traffic volume over time, is to determine wheth
 
 1. An input file is parsed to create a target time series, aggregated in units of 1 second for further calculations speed-up.
 2. Using the earliest timestamp and the length of the target, the actual block times during that window are fetched. Note that this information is public by design.
-3. Block times are transformed into expected activity time series by adding bell-like shapes after block times, sized according to typical propagation delay.
-
-We now have two time series, the target and the expected. How similar they are? How confident we are that this level of similarity is not accidental?
-
+3. Block times are transformed into expected activity time series by adding bell-like shapes after block times, sized according to typical propagation delay. We now have two time series, the target and the expected. How similar they are? How confident we are that this level of similarity is not accidental?
 4. To answer the first question, we calculate the correlation of the target and the expected. The problem is, the correlation is not a sufficient metric by itself, as what correlation we should consider meaningful depends on the shape of the traffic - e.g. 40% may be very significant for some shape of the traffic, and really low for others.
 5. We address that issue by generating a lot of fake expected time series that have, on average, the same number of blocks as actual one, and calculate the traffic correlation to every one of them. Those fakes are very similar to the expected activity, except for one thing - the block times are selected randomly, regardless of the real block times. If the target traffic is as similar to these as it is to real block times, this similarity is meaningless.
 6. We calculate the z-score of the actual correlation compared to the fake ones - a measure of how far the actual correlation is from the fakes average, compared to how scattered the fakes tend to be. Intuitively, we now know not only how similar our traffic is to the expected Bitcoin activity - we also know how unlikely such similarity was to occur by chance.
@@ -43,7 +40,7 @@ All that is left is to define a threshold for tagging a traffic as Bitcoin-relat
 ## Performance
 The performance of the attack is a function of traffic length, with longer logs corresponding with better performance. For the ease of presentation, we used a single confidence threshold of 95%, preferring to err on the false negative side.  
 For the true positive estimation we used our own full node traffic, logged for 24 hours. Note that we did record on the 8333 port, so the results apply to dedicated nodes only. We will discuss mixed traffic in a later section.  
-There are infinitely many options to define false positive. We mostly used, arguably, the 'hardest' one - the same actual full node traffic, but with shifted timestamps (e.g. shifted three hours backwards). This way, the traffic logs still represent Bitcoin activity, but the logs don't match the real block times. We also added several YouTube traffic logs of Khabib Nurmagomedov training. None of that did matter much as with a given threshold the false positive rate was, effectively, zero.
+There are infinitely many options to define false positive. We mostly used, arguably, the 'hardest' one - the same actual full node traffic, but with shifted timestamps (e.g. shifted three hours backwards). This way, the traffic logs still represent Bitcoin activity, but the logs don't match the real block times. We also added several YouTube traffic logs. None of that did matter much as with a given threshold the false positive rate was, effectively, zero.
 
 ![_config.yml]({{ site.baseurl }}/images/config.png)
 
@@ -63,9 +60,8 @@ There are many ways to go about it, but staying completely undetected is far fro
 
 Beyond active measures available now, both privacy and bandwidth efficiency of Bitcoin communications are actively worked on. It is entirely possible that the messaging protocol will get to the point where block propagation doesn’t trigger any significant spikes in traffic volume.
 
-## Pitch
-Click below to watch our pitch from the hackathon.
-[![](http://img.youtube.com/vi/9S8xsDq3PTU/0.jpg)](http://www.youtube.com/watch?v=9S8xsDq3PTU "")
+## Hackathon Pitch
+<iframe width="560" height="315" src="https://www.youtube.com/embed/9S8xsDq3PTU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Acknowledgements  
 The technique idea was originally investigated in work by Prof. Ittay Eyal, Prof. Amir Houmansadr, Fatemeh Rezaei and Niko Kudriastev.
