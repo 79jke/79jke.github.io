@@ -3,10 +3,10 @@ layout: post
 title: Introducing BitSniff
 ---
 
-As Bitcoin stubbornly continues to exist and gain traction, it also starts grabbing attention of those in charge. With censorship resistance being one of Bitcoin's key value propositions, the ability of third parties to establish who participates in this new economy may become a non-negligible issue. Imagine Bitcoin getting completely outlawed in China - being detected while using it may have very grim consequences.
+As Bitcoin stubbornly continues to exist and gain traction, it also starts grabbing attention of those in charge. With censorship resistance being one of Bitcoin's key value propositions, the ability of third parties to establish who participates in this new economy may become a non-negligible issue. Imagine Bitcoin getting completely outlawed in China - being detected while using it may have very grim consequences.  
 Therefore, we must ask ourselves - who else knows you are running Bitcoin?
 
-For most nodes in the network, the answer is "pretty much everyone", given that Bitcoin P2P communications aren't even encrypted and the same port is being used almost universally. But, arguably, most nodes in the network don't care much about being detected.
+For most nodes in the network, the answer is "pretty much everyone", given that Bitcoin P2P communications aren't even encrypted and the same port is being used almost universally. But, arguably, most nodes in the network don't care much about being detected.  
 Now for those who do care, some steps are obvious - using VPN and running the node over Tor being the most obvious ones. We aim to show that it may not be enough, by implementing a technique that is able to detect Bitcoin communications using nothing but traffic volume over time - an information even most privacy concerned individuals are likely leaking to their law-abiding Internet Service Provider.
 
 ![_config.yml]({{ site.baseurl }}/images/config.png)
@@ -14,7 +14,7 @@ Now for those who do care, some steps are obvious - using VPN and running the no
 Background
 
 Every time you use software that interacts with a Bitcoin network, and especially a Bitcoin node, you leave a sticky fingerprint in your traffic. It comes in the form of a small, but unavoidable spike in volume every time a new block is mined and the nodes start gossiping about it. The blocks in Bitcoin are quite big, and the propagation speed is critical for consensus (greater delay means more frequent accidental forks), so such effect is predictable, and, in a sense, inherent to the Bitcoin architecture.
-Notably, the volume of block-related messages was drastically reduced since the introduction of Compact Block Relay (BIP 152). Instead of requesting whole blocks, mostly consisting of transactions already known to the node, the peer informed of a new block is only requesting the missing transactions. Yet the amount of extra communications in the seconds following a new block is still considerable.
+Notably, the volume of block-related messages was drastically reduced since the introduction of Compact Block Relay (BIP 152). Instead of requesting whole blocks, mostly consisting of transactions already known to the node, the peer informed of a new block is only requesting the missing transactions. Yet the amount of extra communications in the seconds following a new block is still considerable.  
 
 ![_config.yml]({{ site.baseurl }}/images/config.png)
 
