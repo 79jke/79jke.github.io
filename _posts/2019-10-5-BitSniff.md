@@ -12,7 +12,8 @@ The following is the project write-up, focused on motivation and methodology.
 <!--more-->
 ## Motivation
 As Bitcoin stubbornly continues to exist and gain traction, it also starts grabbing attention of those in charge. With censorship resistance being one of Bitcoin's key value propositions, the ability of third parties to establish who participates in this new economy may become a non-negligible issue. Imagine Bitcoin getting completely outlawed in China - being detected while using it may have very grim consequences.  
-Therefore, we must ask ourselves - who else knows you are running Bitcoin?
+
+Therefore, we must ask ourselves - **who else knows you are running Bitcoin**?
 
 For most nodes in the network, the answer is "pretty much everyone", given that Bitcoin P2P communications aren't even encrypted and the same port is being used almost universally. But, arguably, most nodes in the network don't care much about being detected.  
 Now for those who do care, some steps are obvious - using VPN and running the node over Tor being the most obvious ones. We aim to show that it may not be enough, by implementing a technique that is able to detect Bitcoin communications using nothing but traffic volume over time - an information even most privacy concerned individuals are likely leaking to their law-abiding Internet Service Provider.
