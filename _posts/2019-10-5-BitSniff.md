@@ -3,6 +3,8 @@ layout: post
 title: Introducing BitSniff
 ---
 
+![_config.yml]({{ site.baseurl }}/images/bitsniff/protocol-flow.png)
+
 On September 5th-6th, during the [Bitcoin emBassy Hackathon](https://www.meetup.com/bitcoin-il/events/264327474/), myself and [Michael Maltsev](https://m417z.com/) developed **BitSniff** - a tool for detecting Bitcoin-related communications in encrypted traffic. Today we release an updated and more stable version of it. You can check the interactive [demo](https://m417z.com/bitsniff/) or clone the GitHub [repository](https://github.com/m417z/bitsniff) to use it yourself.  
 The following is the project write-up, focused on motivation and methodology.
 
