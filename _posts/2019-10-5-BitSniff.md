@@ -3,7 +3,7 @@ layout: post
 title: Introducing BitSniff
 ---
 
-On September 5th-6th, during the Bitcoin emBassy Hackathon, myself and Michael Maltsev developed **BitSniff** - a tool for detecting Bitcoin-related communications in encrypted traffic. Today we release an updated and more stable version of it. You can check the interactive [demo](https://m417z.com/bitsniff/) or clone the GitHub [repository](https://github.com/m417z/bitsniff) to use it yourself.  
+On September 5th-6th, during the [Bitcoin emBassy Hackathon](https://www.meetup.com/bitcoin-il/events/264327474/), myself and [Michael Maltsev](https://m417z.com/) developed **BitSniff** - a tool for detecting Bitcoin-related communications in encrypted traffic. Today we release an updated and more stable version of it. You can check the interactive [demo](https://m417z.com/bitsniff/) or clone the GitHub [repository](https://github.com/m417z/bitsniff) to use it yourself.  
 The following is the project write-up, focused on motivation and methodology.
 
 ## Motivation
@@ -65,7 +65,7 @@ There are many ways to go about it, but staying completely undetected is far fro
 Beyond active measures available now, both privacy and bandwidth efficiency of Bitcoin communications are actively worked on. It is entirely possible that the messaging protocol will get to the point where block propagation doesn’t trigger any significant spikes in traffic volume.
 
 ## Hackathon Pitch
-<iframe width="560" height="315" src="https://www.youtube.com/embed/9S8xsDq3PTU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/9S8xsDq3PTU' frameborder='0' allowfullscreen></iframe></div>
 
 ## Acknowledgements  
 The technique idea was originally investigated in work by Prof. Ittay Eyal, Prof. Amir Houmansadr, Fatemeh Rezaei and Niko Kudriastev.
