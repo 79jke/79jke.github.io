@@ -56,7 +56,7 @@ The technique has a more marketable use as well - detecting illegal mining activ
 One common case is gaining illicit access to electricity for Bitcoin mining, exploiting corporate resources or governmental facilities. Another is Monero CPU mining malware. Currently, most antivirus software relies on binary signatures and known endpoints to detect mining malware, both of which can be tricked.
 
 ## Protection
-There are many ways to go about it, but staying completely undetected is far from trivial -traditional privacy enhancing tools mostly focus on the packet level, which is orthogonal to the technique. Let’s break up the potential defence vectors.
+There are many ways to go about it, but staying completely undetected is far from trivial - traditional privacy enhancing tools mostly focus on the packet level, which is orthogonal to the technique. Let’s break up the potential defence vectors.
  
 * **VPN / Tor** - unlikely to affect the time series shape much, and therefore for larger traffic lengths the statistical significance of block-related spikes will inevitably become overwhelming.
 * **Traffic mixing** - for traffic volumes that are orders of magnitude higher than Bitcoin P2P communications, mixing is likely to be very effective. That would, however, demand constant shielding of both upstream and downstream communications, and couldn’t be done effectively by just running the node on a general purpose machine - any noticeably long unshielded period may be enough for detection.
