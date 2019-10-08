@@ -56,7 +56,7 @@ The technique has a more marketable use as well - detecting illegal mining activ
 One common case is gaining illicit access to electricity for Bitcoin mining, exploiting corporate resources or governmental facilities. Another is Monero CPU mining malware. Currently, most antivirus software relies on binary signatures and known endpoints to detect mining malware, both of which can be tricked.
 
 ## Protection
-There are many ways to go about it, but staying completely undetected is far from trivial. Traditional privacy enhancing tools mostly focus on the packet level, which is orthogonal to the technique, and there is no ongoing effort to address it on the protocol level. Let’s break up the potential defence vectors.
+There are many ways to go about it, but staying completely undetected is far from trivial -traditional privacy enhancing tools mostly focus on the packet level, which is orthogonal to the technique. Let’s break up the potential defence vectors.
  
 * **VPN / Tor** - unlikely to affect the time series shape much, and therefore for larger traffic lengths the statistical significance of block-related spikes will inevitably become overwhelming.
 * **Traffic mixing** - for traffic volumes that are orders of magnitude higher than Bitcoin P2P communications, mixing is likely to be very effective. That would, however, demand constant shielding of both upstream and downstream communications, and couldn’t be done effectively by just running the node on a general purpose machine - any noticeably long unshielded period may be enough for detection.
@@ -68,4 +68,8 @@ Beyond active measures available now, both privacy and bandwidth efficiency of B
 <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/9S8xsDq3PTU' frameborder='0' allowfullscreen></iframe></div>
 
 ## Acknowledgements  
-The technique idea was originally investigated in work by Prof. Ittay Eyal, Prof. Amir Houmansadr, Fatemeh Rezaei and Niko Kudriastev.
+The technique idea was originally investigated in work by:
+* [Prof. Ittay Eyal](http://webee.technion.ac.il/people/ittay/)
+* [Prof. Amir Houmansadr](https://www.cics.umass.edu/faculty/directory/houmansadr_amir)
+* [Fatemeh Rezaei](https://www.linkedin.com/in/fatemeh-rezaei-8a745940/) 
+* [Niko Kudriastev](https://79jke.github.io/)
