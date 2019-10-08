@@ -26,7 +26,7 @@ This effect may not be noticeable for a single block, but over time it gets stat
 ## Methodology
 Our goal, given a time series of traffic volume over time, is to determine whether it tends to have larger volume just after a new block is found, during a window of typical propagation delay. We also aim to provide a meaningful metric measuring how confident we are that Bitcoin communications are, indeed, present.
 
-![_config.yml]({{ site.baseurl }}/images/bitsniff/flowchart.jpg)
+![_config.yml]({{ site.baseurl }}/images/bitsniff/flowchart.png)
 
 * An input file is parsed to create a target time series, aggregated in units of 1 second for further calculations speed-up.
 * Using the earliest timestamp and the length of the target, the actual block times during that window are fetched. Note that this information is public by design.
@@ -46,7 +46,7 @@ The performance of the attack is a function of traffic length, with longer logs 
 For the true positive estimation we used our own full node traffic, logged for 24 hours. Note that we did record on the 8333 port, so the results apply to dedicated nodes only. We will discuss mixed traffic in a later section.  
 There are infinitely many options to define false positive. We mostly used, arguably, the 'hardest' one - the same actual full node traffic, but with shifted timestamps (e.g. shifted three hours backwards). This way, the traffic logs still represent Bitcoin activity, but the logs don't match the real block times. We also added several YouTube traffic logs. None of that did matter much as with a given threshold the false positive rate was, effectively, zero.
 
-![_config.yml]({{ site.baseurl }}/images/bitsniff/performance.jpg)
+![_config.yml]({{ site.baseurl }}/images/bitsniff/performance.png)
 
 ## Use Cases
 As mentioned above, one use case for the technique is detecting Bitcoin nodes by governments or ISPs. Our primary motivation behind this project is raising awareness regarding this possibility.  
