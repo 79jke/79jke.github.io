@@ -4,4 +4,4 @@ title: About
 permalink: /about/
 ---
 
-Quant Researcher by day. Happy all the time.
+Master of Science student. Former Senior Quant Researcher. Happy all the time.
